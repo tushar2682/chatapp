@@ -1,0 +1,8 @@
+.env
+backend/.env
+frontend/react/.env
+.env
+backend/.env
+frontend/react/.env
+node_modules/
+backend/node_modules/
