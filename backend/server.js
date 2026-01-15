@@ -34,9 +34,16 @@ app.get("/", (req, res) => {
 app.use("/api/sessions", sessionRoutes);
 app.use("/api/chat", chatRoutes);
 
-app.listen(ENV.PORT, () => {
-    connectDB();
-    console.log(`server is running on port ${ENV.PORT}`);
-})
+// Database connection for serverless environments
+connectDB();
+
+// Only start the server if this file is run directly
+const isMainModule = import.meta.url === `file://${process.argv[1]}` || process.argv[1]?.endsWith('server.js');
+
+if (isMainModule) {
+    app.listen(ENV.PORT || 5001, () => {
+        console.log(`server is running on port ${ENV.PORT || 5001}`);
+    });
+}
 
 export default app;
